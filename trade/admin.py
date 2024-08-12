@@ -5,11 +5,14 @@ from trade.models import LinkNetwork
 
 @admin.action(description="Reset debt")
 def delete_debt(modeladmin, request, queryset):
+    """Функция для обнуления задолженности перед поставщиком"""
     queryset.update(debt=0)
 
 
 @admin.register(LinkNetwork)
 class LinkNetworkAdmin(admin.ModelAdmin):
+    """Отображение информации о звеньях сети"""
+
     list_display = [
         "id",
         "name",

@@ -9,6 +9,8 @@ from trade.serializers import LinkNetworkSerializer, LinkNetworkDetailSerializer
 
 
 class LinkNetworkCreateAPIView(CreateAPIView):
+    """Создание звена сети"""
+
     queryset = LinkNetwork.objects.all()
     serializer_class = LinkNetworkSerializer
 
@@ -17,6 +19,8 @@ class LinkNetworkCreateAPIView(CreateAPIView):
 
 
 class LinkNetworkListAPIView(ListAPIView):
+    """Просмотр списка звеньев сети"""
+
     queryset = LinkNetwork.objects.all()
     serializer_class = LinkNetworkSerializer
     filter_backends = [DjangoFilterBackend]
@@ -28,18 +32,24 @@ class LinkNetworkListAPIView(ListAPIView):
 
 
 class LinkNetworkRetrieveAPIView(RetrieveAPIView):
+    """Просмотр одного звена сети"""
+
     queryset = LinkNetwork.objects.all()
     serializer_class = LinkNetworkDetailSerializer
     permission_classes = [IsAdminUser | IsOwner]
 
 
 class LinkNetworkUpdateAPIView(UpdateAPIView):
+    """Обновление звена сети"""
+
     queryset = LinkNetwork.objects.all()
     serializer_class = LinkNetworkUpdateSerializer
     permission_classes = [IsAdminUser | IsOwner]
 
 
 class LinkNetworkDestroyAPIView(DestroyAPIView):
+    """Удаление звена сети"""
+
     queryset = LinkNetwork.objects.all()
     serializer_class = LinkNetworkSerializer
     permission_classes = [IsAdminUser | IsOwner]

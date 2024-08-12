@@ -7,6 +7,8 @@ NULLABLE = {"null": True, "blank": True}
 
 
 class LinkNetwork(models.Model):
+    """Модель звена сети"""
+
     class Level(models.IntegerChoices):
         FACTORY = 0, _("Завод")
         RETAIL_NETWORK = 1, _("Розничная сеть")

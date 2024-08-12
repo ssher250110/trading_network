@@ -5,6 +5,8 @@ from trade.validators import ProviderValidator
 
 
 class LinkNetworkSerializer(ModelSerializer):
+    """Сериализатор звена сети"""
+
     class Meta:
         model = LinkNetwork
         fields = "__all__"
@@ -12,6 +14,8 @@ class LinkNetworkSerializer(ModelSerializer):
 
 
 class LinkNetworkDetailSerializer(ModelSerializer):
+    """Сериализатор детальной информации о звене сети"""
+
     class Meta:
         model = LinkNetwork
         exclude = ["owner"]
@@ -19,6 +23,8 @@ class LinkNetworkDetailSerializer(ModelSerializer):
 
 
 class LinkNetworkUpdateSerializer(ModelSerializer):
+    """Сериализатор обновления информации о звене сети без поля задолженности"""
+
     class Meta:
         model = LinkNetwork
         exclude = ["debt"]

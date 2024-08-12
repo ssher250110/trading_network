@@ -2,6 +2,8 @@ from rest_framework.serializers import ValidationError
 
 
 class ProviderValidator:
+    """Валидация поля поставщик"""
+
     def __init__(self, field):
         self.field = field
 
