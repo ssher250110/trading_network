@@ -25,8 +25,8 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("users.urls", namespace="users")),
     path("", include("trade.urls", namespace="trade")),
-    path('schema/', SpectacularAPIView.as_view(), name='schema'),
-    path('swagger/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger'),
-    path('redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
+    path("schema/", SpectacularAPIView.as_view(), name="schema"),
+    path("swagger/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger"),
+    path("redoc/", SpectacularRedocView.as_view(url_name="schema"), name="redoc"),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
