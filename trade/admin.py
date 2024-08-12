@@ -3,7 +3,7 @@ from django.contrib import admin
 from trade.models import LinkNetwork
 
 
-@admin.action(description="Delete debt")
+@admin.action(description="Reset debt")
 def delete_debt(modeladmin, request, queryset):
     queryset.update(debt=0)
 
