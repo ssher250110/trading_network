@@ -1,3 +1,30 @@
 from django.contrib import admin
 
-# Register your models here.
+from trade.models import LinkNetwork
+
+
+@admin.action(description="Delete debt")
+def delete_debt(modeladmin, request, queryset):
+    queryset.update(debt=0)
+
+
+@admin.register(LinkNetwork)
+class LinkNetworkAdmin(admin.ModelAdmin):
+    list_display = [
+        "id",
+        "name",
+        "email",
+        "country",
+        "city",
+        "street",
+        "house_number",
+        "name_product",
+        "model_product",
+        "product_release_date",
+        "provider",
+        "debt",
+        "created_at",
+        "level",
+        "owner",
+    ]
+    actions = [delete_debt]
