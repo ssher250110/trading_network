@@ -17,7 +17,7 @@ services:
       timeout: 5s
 
   trading_network:
-    build: ./trading_network
+    build: ./
     tty: true
     ports:
       - "8000:8000"
