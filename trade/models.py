@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 
 NULLABLE = {"null": True, "blank": True}
 
@@ -9,7 +10,7 @@ class Product(models.Model):
     name = models.CharField(max_length=255, verbose_name="Название продукта", help_text="Укажите название продукта")
     model = models.CharField(max_length=255, verbose_name="Модель продукта", help_text="Укажите модель продукта")
     product_release_date = models.DateTimeField(
-        default=timezone.now(),
+        default=timezone.now,
         verbose_name="Дата выхода продукта на рынок",
         help_text="Укажите дату выхода продукта на рынок",
     )
@@ -30,9 +31,9 @@ class Product(models.Model):
 
 class LinkNetwork(models.Model):
     class Level(models.IntegerChoices):
-        FACTORY = 0
-        RETAIL_NETWORK = 1
-        INDIVIDUAL_BUSINESSMAN = 2
+        FACTORY = 0, _("Завод")
+        RETAIL_NETWORK = 1, _("Розничная сеть")
+        INDIVIDUAL_BUSINESSMAN = 2, _("Индивидуальный предприниматель")
 
     name = models.CharField(
         max_length=255, verbose_name="Название звена сети", help_text="Укажите название звена сети"
