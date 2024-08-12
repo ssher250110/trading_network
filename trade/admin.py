@@ -27,4 +27,5 @@ class LinkNetworkAdmin(admin.ModelAdmin):
         "level",
         "owner",
     ]
+    list_filter = ["country"]
     actions = [delete_debt]
