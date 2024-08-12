@@ -15,6 +15,8 @@ class LinkNetworkCreateAPIView(CreateAPIView):
     serializer_class = LinkNetworkSerializer
 
     def perform_create(self, serializer):
+        """Добавление пользователя создавшего звено сети"""
+
         serializer.save(owner=self.request.user)
 
 
@@ -28,6 +30,8 @@ class LinkNetworkListAPIView(ListAPIView):
     permission_classes = [IsAdminUser | IsOwner]
 
     def get_queryset(self):
+        """Получение набора данных по условию"""
+
         return LinkNetwork.objects.filter(owner=self.request.user)
 
 
