@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAdminUser
 from trade.filters import CountryFilter
 from trade.models import LinkNetwork
 from trade.permissions import IsOwner
-from trade.serializers import LinkNetworkSerializer, LinkNetworkDetailSerializer
+from trade.serializers import LinkNetworkSerializer, LinkNetworkDetailSerializer, LinkNetworkUpdateSerializer
 
 
 class LinkNetworkCreateAPIView(CreateAPIView):
@@ -35,7 +35,7 @@ class LinkNetworkRetrieveAPIView(RetrieveAPIView):
 
 class LinkNetworkUpdateAPIView(UpdateAPIView):
     queryset = LinkNetwork.objects.all()
-    serializer_class = LinkNetworkSerializer
+    serializer_class = LinkNetworkUpdateSerializer
     permission_classes = [IsAdminUser | IsOwner]
 
 
