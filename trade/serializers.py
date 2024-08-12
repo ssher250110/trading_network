@@ -16,3 +16,10 @@ class LinkNetworkDetailSerializer(ModelSerializer):
         model = LinkNetwork
         exclude = ["owner"]
         depth = 1
+
+
+class LinkNetworkUpdateSerializer(ModelSerializer):
+    class Meta:
+        model = LinkNetwork
+        exclude = ["debt"]
+        validators = [ProviderValidator(field="provider")]
