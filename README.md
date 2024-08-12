@@ -1,4 +1,4 @@
-# Онлайн платформа-торговой сети электроники.
+# MVP онлайн платформы-торговой сети электроники.
 
 ## Задание
 
@@ -33,19 +33,25 @@
     ```
 
 - Команда для создания суперпользователя
+```bash
+docker ps
+```
+```bash
+docker exec -it <id_container_trading_network> bash
+```
 
 ```bash
-python skymarket/manage.py createsuperuser
+python3 manage.py createsuperuser
 ```
 
 - Пути документации
 
 ```bash
-http://127.0.0.1:8000/api/swagger/
+http://127.0.0.1:8000/swagger/
 ```
 
 ```bash
-http://127.0.0.1:8000/api/redoc/
+http://127.0.0.1:8000/redoc/
 ```
 
 ### Автор проекта:
