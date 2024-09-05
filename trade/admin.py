@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from trade.models import LinkNetwork
+from trade.models import LinkNetwork, ContactData, Product
 
 
 @admin.action(description="Reset debt")
@@ -9,26 +9,45 @@ def delete_debt(modeladmin, request, queryset):
     queryset.update(debt=0)
 
 
-@admin.register(LinkNetwork)
-class LinkNetworkAdmin(admin.ModelAdmin):
-    """Отображение информации о звеньях сети"""
+@admin.register(ContactData)
+class ContactDataAdmin(admin.ModelAdmin):
+    """Отображение информации о контактных данных"""
 
     list_display = [
         "id",
-        "name",
         "email",
         "country",
         "city",
         "street",
         "house_number",
+    ]
+    list_filter = ["email"]
+    # actions = [delete_debt]
+
+
+@admin.register(Product)
+class ProductAdmin(admin.ModelAdmin):
+    """Отображение информации о продукте"""
+
+    list_display = [
         "name_product",
         "model_product",
-        "product_release_date",
+        "product_release_date"
+    ]
+    list_filter = ["name_product"]
+
+@admin.register(LinkNetwork)
+class LinkNetworkAdmin(admin.ModelAdmin):
+    """Отображение информации о звене цепи"""
+
+    list_display = [
+        "name",
+        "contact",
+        "product",
+        "level",
         "provider",
         "debt",
         "created_at",
-        "level",
-        "owner",
+        "owner"
     ]
-    list_filter = ["city"]
-    actions = [delete_debt]
+    list_filter = ["name"]
