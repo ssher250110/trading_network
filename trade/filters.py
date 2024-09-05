@@ -1,5 +1,5 @@
 import django_filters
-from trade.models import LinkNetwork
+from trade.models import ContactData
 
 
 class CountryFilter(django_filters.rest_framework.FilterSet):
@@ -8,5 +8,5 @@ class CountryFilter(django_filters.rest_framework.FilterSet):
     title = django_filters.CharFilter(field_name="country", lookup_expr="icontains")
 
     class Meta:
-        model = LinkNetwork
+        model = ContactData
         fields = ["country"]

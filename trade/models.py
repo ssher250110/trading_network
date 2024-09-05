@@ -6,22 +6,26 @@ from django.utils.translation import gettext_lazy as _
 NULLABLE = {"null": True, "blank": True}
 
 
-class LinkNetwork(models.Model):
-    """Модель звена сети"""
+class ContactData(models.Model):
+    """Модель контактные данные"""
 
-    class Level(models.IntegerChoices):
-        FACTORY = 0, _("Завод")
-        RETAIL_NETWORK = 1, _("Розничная сеть")
-        INDIVIDUAL_BUSINESSMAN = 2, _("Индивидуальный предприниматель")
-
-    name = models.CharField(
-        max_length=255, verbose_name="Название звена сети", help_text="Укажите название звена сети"
-    )
     email = models.EmailField(verbose_name="Почта", help_text="Укажите электронную почту")
     country = models.CharField(max_length=255, verbose_name="Название страны", help_text="Укажите название страны")
     city = models.CharField(max_length=255, verbose_name="Название города", help_text="Укажите название города")
     street = models.CharField(max_length=255, verbose_name="Название улицы", help_text="Укажите название улицы")
     house_number = models.PositiveSmallIntegerField(verbose_name="Номер дома", help_text="Укажите номер дома")
+
+    def __str__(self):
+        return self.email
+
+    class Meta:
+        verbose_name = "Контактные данные"
+        verbose_name_plural = "Контактные данные"
+
+
+class Product(models.Model):
+    """Модель продукта"""
+
     name_product = models.CharField(
         max_length=255, verbose_name="Название продукта", help_text="Укажите название продукта"
     )
@@ -33,6 +37,30 @@ class LinkNetwork(models.Model):
         verbose_name="Дата выхода продукта на рынок",
         help_text="Укажите дату выхода продукта на рынок",
     )
+
+    def __str__(self):
+        return self.name_product
+
+    class Meta:
+        verbose_name = "Продукт"
+        verbose_name_plural = "Продукты"
+
+
+class LinkNetwork(models.Model):
+    """Модель звена сети"""
+
+    class Level(models.IntegerChoices):
+        FACTORY = 0, _("Завод")
+        RETAIL_NETWORK = 1, _("Розничная сеть")
+        INDIVIDUAL_BUSINESSMAN = 2, _("Индивидуальный предприниматель")
+
+    name = models.CharField(
+        max_length=255, verbose_name="Название звена сети", help_text="Укажите название звена сети"
+    )
+    contact = models.ForeignKey("ContactData", on_delete=models.SET_NULL, **NULLABLE, verbose_name="Контактные данные",
+                                help_text="Укажите контактные данные")
+    product = models.ForeignKey("Product", on_delete=models.SET_NULL, **NULLABLE, verbose_name="Продукт",
+                                help_text="Укажите продукт")
     level = models.PositiveSmallIntegerField(
         choices=Level, verbose_name="Уровень звена сети", help_text="Укажите уровень звена сети"
     )
