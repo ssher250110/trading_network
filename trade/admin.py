@@ -22,7 +22,6 @@ class ContactDataAdmin(admin.ModelAdmin):
         "house_number",
     ]
     list_filter = ["email"]
-    # actions = [delete_debt]
 
 
 @admin.register(Product)
@@ -35,6 +34,7 @@ class ProductAdmin(admin.ModelAdmin):
         "product_release_date"
     ]
     list_filter = ["name_product"]
+
 
 @admin.register(LinkNetwork)
 class LinkNetworkAdmin(admin.ModelAdmin):
@@ -51,3 +51,4 @@ class LinkNetworkAdmin(admin.ModelAdmin):
         "owner"
     ]
     list_filter = ["name"]
+    actions = [delete_debt]
