@@ -15,6 +15,13 @@ class ContactData(models.Model):
     street = models.CharField(max_length=255, verbose_name="Название улицы", help_text="Укажите название улицы")
     house_number = models.PositiveSmallIntegerField(verbose_name="Номер дома", help_text="Укажите номер дома")
 
+    def __str__(self):
+        return self.email
+
+    class Meta:
+        verbose_name = "Контактные данные"
+        verbose_name_plural = "Контактные данные"
+
 
 class Product(models.Model):
     """Модель продукта"""
@@ -30,6 +37,13 @@ class Product(models.Model):
         verbose_name="Дата выхода продукта на рынок",
         help_text="Укажите дату выхода продукта на рынок",
     )
+
+    def __str__(self):
+        return self.name_product
+
+    class Meta:
+        verbose_name = "Продукт"
+        verbose_name_plural = "Продукты"
 
 
 class LinkNetwork(models.Model):
