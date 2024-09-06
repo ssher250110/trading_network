@@ -1,7 +1,23 @@
 from rest_framework.serializers import ModelSerializer
 
-from trade.models import LinkNetwork
+from trade.models import ContactData, LinkNetwork, Product
 from trade.validators import ProviderValidator
+
+
+class ContactDataSerializer(ModelSerializer):
+    """Сериализатор контактных данных"""
+
+    class Meta:
+        model = ContactData
+        fields = ["id", "email", "country", "city", "street", "house_number"]
+
+
+class ProductSerializer(ModelSerializer):
+    """Сериализатор продукта"""
+
+    class Meta:
+        model = Product
+        fields = ["id", "name_product", "model_product", "product_release_date"]
 
 
 class LinkNetworkSerializer(ModelSerializer):
@@ -9,7 +25,7 @@ class LinkNetworkSerializer(ModelSerializer):
 
     class Meta:
         model = LinkNetwork
-        fields = "__all__"
+        fields = ["id", "name", "contact", "product", "level", "provider", "debt", "created_at", "owner"]
         validators = [ProviderValidator(field="provider")]
 
 
