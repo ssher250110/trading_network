@@ -20,6 +20,7 @@ class ContactDataAdmin(admin.ModelAdmin):
         "city",
         "street",
         "house_number",
+        "creator"
     ]
     list_filter = ["email"]
 
@@ -31,7 +32,8 @@ class ProductAdmin(admin.ModelAdmin):
     list_display = [
         "name_product",
         "model_product",
-        "product_release_date"
+        "product_release_date",
+        "creator"
     ]
     list_filter = ["name_product"]
 
@@ -48,7 +50,7 @@ class LinkNetworkAdmin(admin.ModelAdmin):
         "provider",
         "debt",
         "created_at",
-        "owner"
+        "creator"
     ]
     list_filter = ["name"]
     actions = [delete_debt]
