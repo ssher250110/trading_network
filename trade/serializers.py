@@ -9,7 +9,7 @@ class ContactDataSerializer(ModelSerializer):
 
     class Meta:
         model = ContactData
-        fields = ["id", "email", "country", "city", "street", "house_number"]
+        fields = ["id", "email", "country", "city", "street", "house_number", "creator"]
 
 
 class ProductSerializer(ModelSerializer):
@@ -17,7 +17,7 @@ class ProductSerializer(ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ["id", "name_product", "model_product", "product_release_date"]
+        fields = ["id", "name_product", "model_product", "product_release_date", "creator"]
 
 
 class LinkNetworkSerializer(ModelSerializer):
@@ -25,7 +25,7 @@ class LinkNetworkSerializer(ModelSerializer):
 
     class Meta:
         model = LinkNetwork
-        fields = ["id", "name", "contact", "product", "level", "provider", "debt", "created_at", "owner"]
+        fields = ["id", "name", "contact", "product", "level", "provider", "debt", "created_at", "creator"]
         validators = [ProviderValidator(field="provider")]
 
 
@@ -34,7 +34,7 @@ class LinkNetworkDetailSerializer(ModelSerializer):
 
     class Meta:
         model = LinkNetwork
-        exclude = ["owner"]
+        exclude = ["creator"]
         depth = 1
 
 
