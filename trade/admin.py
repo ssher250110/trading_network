@@ -13,15 +13,7 @@ def delete_debt(modeladmin, request, queryset):
 class ContactDataAdmin(admin.ModelAdmin):
     """Отображение информации о контактных данных"""
 
-    list_display = [
-        "id",
-        "email",
-        "country",
-        "city",
-        "street",
-        "house_number",
-        "creator"
-    ]
+    list_display = ["id", "email", "country", "city", "street", "house_number", "creator"]
     list_filter = ["email", "country"]
 
 
@@ -29,12 +21,7 @@ class ContactDataAdmin(admin.ModelAdmin):
 class ProductAdmin(admin.ModelAdmin):
     """Отображение информации о продукте"""
 
-    list_display = [
-        "name_product",
-        "model_product",
-        "product_release_date",
-        "creator"
-    ]
+    list_display = ["name_product", "model_product", "product_release_date", "creator"]
     list_filter = ["name_product"]
 
 
@@ -42,15 +29,6 @@ class ProductAdmin(admin.ModelAdmin):
 class LinkNetworkAdmin(admin.ModelAdmin):
     """Отображение информации о звене цепи"""
 
-    list_display = [
-        "name",
-        "contact",
-        "product",
-        "level",
-        "provider",
-        "debt",
-        "created_at",
-        "creator"
-    ]
+    list_display = ["name", "contact", "product", "level", "provider", "debt", "created_at", "creator"]
     list_filter = ["name"]
     actions = [delete_debt]
