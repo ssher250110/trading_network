@@ -22,7 +22,7 @@ class ContactDataAdmin(admin.ModelAdmin):
         "house_number",
         "creator"
     ]
-    list_filter = ["email"]
+    list_filter = ["email", "country"]
 
 
 @admin.register(Product)
