@@ -57,10 +57,16 @@ class LinkNetwork(models.Model):
     name = models.CharField(
         max_length=255, verbose_name="Название звена сети", help_text="Укажите название звена сети"
     )
-    contact = models.ForeignKey("ContactData", on_delete=models.SET_NULL, **NULLABLE, verbose_name="Контактные данные",
-                                help_text="Укажите контактные данные")
-    product = models.ForeignKey("Product", on_delete=models.SET_NULL, **NULLABLE, verbose_name="Продукт",
-                                help_text="Укажите продукт")
+    contact = models.ForeignKey(
+        "ContactData",
+        on_delete=models.SET_NULL,
+        **NULLABLE,
+        verbose_name="Контактные данные",
+        help_text="Укажите контактные данные",
+    )
+    product = models.ForeignKey(
+        "Product", on_delete=models.SET_NULL, **NULLABLE, verbose_name="Продукт", help_text="Укажите продукт"
+    )
     level = models.PositiveSmallIntegerField(
         choices=Level, verbose_name="Уровень звена сети", help_text="Укажите уровень звена сети"
     )
