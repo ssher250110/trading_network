@@ -14,6 +14,13 @@ class ContactData(models.Model):
     city = models.CharField(max_length=255, verbose_name="Название города", help_text="Укажите название города")
     street = models.CharField(max_length=255, verbose_name="Название улицы", help_text="Укажите название улицы")
     house_number = models.PositiveSmallIntegerField(verbose_name="Номер дома", help_text="Укажите номер дома")
+    creator = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        **NULLABLE,
+        verbose_name="Пользователь, добавивший контактные данные",
+        help_text="Укажите пользователя, добавившего контактные данные",
+    )
 
     def __str__(self):
         return self.email
@@ -36,6 +43,13 @@ class Product(models.Model):
         default=timezone.now,
         verbose_name="Дата выхода продукта на рынок",
         help_text="Укажите дату выхода продукта на рынок",
+    )
+    creator = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        **NULLABLE,
+        verbose_name="Пользователь, добавивший продукт",
+        help_text="Укажите пользователя, добавившего продукт",
     )
 
     def __str__(self):
@@ -80,9 +94,10 @@ class LinkNetwork(models.Model):
         help_text="Укажите задолженность перед поставщиком",
     )
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания звена сети")
-    owner = models.ForeignKey(
+    creator = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
+        **NULLABLE,
         verbose_name="Пользователь, добавивший звено сети",
         help_text="Укажите пользователя, добавившего звено сети",
     )
