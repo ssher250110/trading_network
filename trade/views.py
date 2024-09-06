@@ -1,11 +1,64 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.generics import CreateAPIView, RetrieveAPIView, UpdateAPIView, ListAPIView, DestroyAPIView
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
+from rest_framework.viewsets import ModelViewSet
 
 from trade.filters import CountryFilter
-from trade.models import LinkNetwork
+from trade.models import ContactData, LinkNetwork, Product
 from trade.permissions import IsOwner
-from trade.serializers import LinkNetworkSerializer, LinkNetworkDetailSerializer, LinkNetworkUpdateSerializer
+from trade.serializers import (
+    ContactDataSerializer,
+    LinkNetworkSerializer,
+    LinkNetworkDetailSerializer,
+    LinkNetworkUpdateSerializer,
+    ProductSerializer,
+)
+
+
+class ContactDataViewSet(ModelViewSet):
+    """Набор связанных представлений модели контактные данные"""
+
+    queryset = ContactData.objects.all()
+    serializer_class = ContactDataSerializer
+
+    def perform_create(self, serializer):
+        """Добавление создателя контактных данных"""
+
+        serializer.save(creator=self.request.user)
+
+    def get_permissions(self):
+        """Получение прав доступа по условиям"""
+
+        if self.action == "create":
+            self.permission_classes = [IsAuthenticated]
+        elif self.action in ["retrieve", "list"]:
+            self.permission_classes = [IsAuthenticated]
+        elif self.action == ["destroy", "update"]:
+            self.permission_classes = [IsAdminUser | IsOwner]
+        return super().get_permissions()
+
+
+class ProductViewSet(ModelViewSet):
+    """Набор связанных представлений модели продукт"""
+
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+    def perform_create(self, serializer):
+        """Добавление создателя продукта"""
+
+        serializer.save(creator=self.request.user)
+
+    def get_permissions(self):
+        """Получение прав доступа по условиям"""
+
+        if self.action == "create":
+            self.permission_classes = [IsAuthenticated]
+        elif self.action in ["retrieve", "list"]:
+            self.permission_classes = [IsAuthenticated]
+        elif self.action == ["destroy", "update"]:
+            self.permission_classes = [IsAdminUser | IsOwner]
+        return super().get_permissions()
 
 
 class LinkNetworkCreateAPIView(CreateAPIView):
@@ -17,7 +70,7 @@ class LinkNetworkCreateAPIView(CreateAPIView):
     def perform_create(self, serializer):
         """Добавление пользователя создавшего звено сети"""
 
-        serializer.save(owner=self.request.user)
+        serializer.save(creator=self.request.user)
 
 
 class LinkNetworkListAPIView(ListAPIView):
@@ -32,7 +85,7 @@ class LinkNetworkListAPIView(ListAPIView):
     def get_queryset(self):
         """Получение набора данных по условию"""
 
-        return LinkNetwork.objects.filter(owner=self.request.user)
+        return LinkNetwork.objects.filter(creator=self.request.user)
 
 
 class LinkNetworkRetrieveAPIView(RetrieveAPIView):
